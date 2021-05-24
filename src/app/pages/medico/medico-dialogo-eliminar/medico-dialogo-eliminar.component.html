@@ -1,0 +1,21 @@
+<div>
+    <h1>¿Elimina el médico?</h1>
+    <p>Luego, no podrá recuperar la información</p>
+    <mat-list>
+        <mat-list-item class="item-dialogo-eliminar">Nombres</mat-list-item>
+        <mat-list-item>{{medico.nombres}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item class="item-dialogo-eliminar">Apellidos</mat-list-item>
+        <mat-list-item>{{medico.apellidos}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item class="item-dialogo-eliminar">CMP</mat-list-item>
+        <mat-list-item>{{medico.cmp}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item class="item-dialogo-eliminar" *ngIf="medico.fotoUrl != null">Foto</mat-list-item>
+        <img mat-card-image [src]="medico.fotoUrl" alt="" width="50%" height="50%" *ngIf="medico.fotoUrl != null">
+        <mat-divider></mat-divider>
+
+    </mat-list>
+</div>
+<button mat-raised-button color="primary" (click)="eliminar()">Aceptar</button>
+<button mat-raised-button color="accent" (click)="cerrar()">Cancelar</button>
