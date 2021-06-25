@@ -1,38 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './pages/layout/layout.component';
 
-import { PacienteEdicionComponent } from './pages/paciente/paciente-edicion/paciente-edicion.component';
-import { PacienteComponent } from './pages/paciente/paciente.component';
-import { MedicoComponent } from './pages/medico/medico.component';
-import { ExamenEdicionComponent } from './pages/examen/examen-edicion/examen-edicion.component';
-import { ExamenComponent } from './pages/examen/examen.component';
-import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
-import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-edicion/especialidad-edicion.component';
-import { ConsultaComponent } from './pages/consulta/consulta.component';
-import { ConsultaEspecialComponent } from './pages/consulta-especial/consulta-especial.component';
+import { LoginComponent } from './pages/login/login.component';
+import { Not404Component } from './pages/not404/not404.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: 'login', component: LoginComponent },
   {
-    path: 'paciente', component: PacienteComponent, children: [
-      { path: 'nuevo', component: PacienteEdicionComponent },
-      { path: 'edicion/:id', component: PacienteEdicionComponent },
-    ]
+    path: 'pages', component: LayoutComponent,
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
   },
-  {
-    path: 'especialidad', component: EspecialidadComponent, children: [
-      { path: 'nuevo', component: EspecialidadEdicionComponent },
-      { path: 'edicion/:id', component: EspecialidadEdicionComponent },
-    ]
-  },
-  {
-    path: 'examen', component: ExamenComponent, children: [
-      { path: 'nuevo', component: ExamenEdicionComponent },
-      { path: 'edicion/:id', component: ExamenEdicionComponent },
-    ]
-  },
-  { path: 'medico', component: MedicoComponent },
-  { path: 'consulta', component: ConsultaComponent },
-  { path: 'consulta-especial', component: ConsultaEspecialComponent }
+  { path: 'not-404', component: Not404Component },
+  { path: '**', redirectTo: 'not-404' }
 ];
 
 @NgModule({

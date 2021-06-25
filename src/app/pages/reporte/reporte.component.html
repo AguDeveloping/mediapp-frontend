@@ -1,0 +1,32 @@
+<mat-toolbar>Reporte de consultas</mat-toolbar>
+
+<button mat-button color="primary" (click)="cambiar('line')">Lineal</button>
+<button mat-button color="primary" (click)="cambiar('bar')">Barras</button>
+<button mat-button color="primary" (click)="cambiar('doughnut')">Rosquilla</button>
+<button mat-button color="primary" (click)="cambiar('radar')">Radar</button>
+<button mat-button color="primary" (click)="cambiar('pie')">Pie</button>
+
+<div [hidden]="!chart">
+    <canvas id="canvas">{{chart}}</canvas>
+</div>
+<mat-divider></mat-divider>
+
+<button mat-button color="primary" (click)="generarReporte()">Ver PDF</button>
+<button mat-button color="primary" (click)="descargarReporte()">Descargar PDF</button>
+<div class="clearfix"></div>
+
+<!-- <pdf-viewer class="pdf-viewer" *ngIf="pdfSrc" [src]="pdfSrc" [render-text]="true" style="display: block;"></pdf-viewer> -->
+<pdf-viewer *ngIf="pdfSrc" [src]="pdfSrc" [render-text]="true"></pdf-viewer>
+
+<div class="clearfix"></div>
+
+<mat-divider></mat-divider>
+
+<button mat-button class="menu-imagen-1" color="primary" onclick="document.getElementById('flArchivo').click()">Seleccionar</button>
+<input id="flArchivo" type="file" style="display: none;" (change)="seleccionarArchivo($event)">
+<p class="menu-imagen-1" id="nombre">{{nombreArchivo}}</p>
+
+<button mat-button class="menu-imagen-1" color="primary" (click)="subirArchivo()" [disabled]="!archivosSeleccionados">Subir Archivo</button>
+
+<div class="clearfix"></div>
+<img class="image" mat-card-image [src]="imagenData" *ngIf="imagenEstado">

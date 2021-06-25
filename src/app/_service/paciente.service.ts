@@ -20,6 +20,10 @@ export class PacienteService extends GenericService<Paciente> {
     );
   }
 
+  listarPageable(p: number, s: number): any {
+    return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`);
+  }
+
   /********************************************/
   // tslint:disable-next-line: typedef
   getPacienteCambio() {

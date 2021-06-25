@@ -1,0 +1,11 @@
+div {
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+div .cartas {
+    width: 300px;
+    margin-bottom: 4px;
+    font-size: 14px;
+}

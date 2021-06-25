@@ -1,0 +1,36 @@
+.medicoCSS {
+    background: darkblue;
+    color: white;
+}
+
+.consultorioCSS {
+    background: darkblue;
+    color: white;
+}
+
+#consultorio {
+    height: 100%;
+    width: 100%;
+    background-color: #555;
+    color: white;
+    text-align: center;
+}
+
+.container mat-card {
+    float: left;
+    margin-right: 10px;
+}
+
+.container mat-card img {
+    height: 300px;
+    width: 0px auto;
+}
+
+.clearfix {
+    float: none;
+    clear: both;
+}
+
+div .boton-siguiente {
+    margin-top: 20px;
+}

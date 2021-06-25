@@ -24,6 +24,7 @@ export class PacienteComponent implements OnInit {
     'apellidos',
     'acciones'
   ];
+  cantidad = 0;
 
   constructor(
     private pacienteService: PacienteService,
@@ -32,8 +33,14 @@ export class PacienteComponent implements OnInit {
 
   ngOnInit(): void {
     // Este subscribe_1 carga la tabla al iniciarse el componente paciente.
-    this.pacienteService.listar().subscribe(data => {
-      this.crearTabla(data);
+    // this.pacienteService.listar().subscribe(data => {
+    //   this.crearTabla(data);
+    // });
+
+    this.pacienteService.listarPageable(0, 10).subscribe(data => {
+      this.cantidad = data.totalElements;
+      this.dataSource = new MatTableDataSource(data.content);
+      this.dataSource.sort = this.sort;
     });
 
     // Este subscribe_2 "REACCIONA" al realizarse un "variable.next()".
@@ -48,8 +55,8 @@ export class PacienteComponent implements OnInit {
     this.pacienteService.getMensajeCambio().subscribe(data => {
       this.snackBar.open(data, 'AVISO', {
         duration: 2000,
-        verticalPosition: "top",
-        horizontalPosition: "right"
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
       });
     });
   }
@@ -76,4 +83,11 @@ export class PacienteComponent implements OnInit {
     this.dataSource.filter = valor.trim().toLowerCase();
   }
 
+  mostrarMas(e: any): void {
+    this.pacienteService.listarPageable(e.pageIndex, e.pageSize).subscribe(data => {
+      this.cantidad = data.totalElements;
+      this.dataSource = new MatTableDataSource(data.content);
+      this.dataSource.sort = this.sort;
+    });
+  }
 }

@@ -1,0 +1,54 @@
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmSigno="ngForm" (ngSubmit)="operar()">
+
+  <div [hidden]="true">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="ID" required formControlName="id">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <input type="text" placeholder="Paciente" matInput required [matAutocomplete]="autoPaciente"
+      [formControl]="myControlPaciente" formControlName="paciente">
+
+    <mat-autocomplete #autoPaciente="matAutocomplete" [displayWith]="mostrarPaciente">
+      <mat-option *ngFor="let p of pacientesFiltrados$ | async" [value]="p">
+        {{ p.nombres }} {{p.apellidos}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Escoger una fecha dd/mm/yyyy" [max]="maxFecha" required
+      formControlName="fecha">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Temperatura" required formControlName="temperatura" t>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Pulso" required formControlName="pulso">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Ritmo respiratorio" required formControlName="ritmoRespiratorio">
+  </mat-form-field>
+  <div class="grupo-boton-registro">
+    <button class="boton-registro" mat-raised-button color="primary" [disabled]="frmSigno.invalid" type="submit">
+      <mat-icon>done</mat-icon>
+      <span>Aceptar</span>
+    </button>
+    <button class="boton-registro" mat-raised-button color="accent" routerLink='/pages/signo-vital' type="button">
+      <mat-icon>close</mat-icon>
+      <span>Cancelar</span>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="abrirDialogo()" type="button" class="nuevo-paciente">
+      <mat-icon>accessibility</mat-icon>
+      <span>Nuevo Paciente</span>
+    </button>
+  </div>
+</form>

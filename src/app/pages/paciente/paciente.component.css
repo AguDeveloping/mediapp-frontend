@@ -66,3 +66,7 @@ table {
     -webkit-hyphens: auto;
     hyphens: auto;
 }
+
+.add-paciente {
+    margin-right: 20px;
+}
